@@ -137,12 +137,12 @@ public class DeviceInfoSettings extends RestrictedSettingsFragment {
 
         // These are contained by the root preference screen
         parentPreference = getPreferenceScreen();
-        if (UserHandle.myUserId() == UserHandle.USER_OWNER) {
+        if ((UserHandle.myUserId() == UserHandle.USER_OWNER) && getResources().getBoolean(R.bool.config_system_update_setting_enable)) {
             Utils.updatePreferenceToSpecificActivityOrRemove(act, parentPreference,
                     KEY_SYSTEM_UPDATE_SETTINGS,
                     Utils.UPDATE_PREFERENCE_FLAG_SET_TITLE_TO_MATCHING_ACTIVITY);
         } else {
-            // Remove for secondary users
+            // Remove for secondary users and when disabled
             removePreference(KEY_SYSTEM_UPDATE_SETTINGS);
         }
         Utils.updatePreferenceToSpecificActivityOrRemove(act, parentPreference, KEY_CONTRIBUTORS,
